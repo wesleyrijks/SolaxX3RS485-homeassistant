@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from twisted.internet import task, reactor
+from twisted.internet import task
 from SolaxX3RS485 import SolaxX3RS485
 
 def outputActions(vals):
@@ -17,6 +17,5 @@ SolaxRS485Meters = []
 SolaxRS485Meters.append(SolaxX3RS485("/dev/ttyUSB0", 9600, "N", 1, 1))
 
 looperSolaxRS485 = task.LoopingCall(inputActions, SolaxRS485Meters)
-looperSolaxRS485.start(5)
+looperSolaxRS485.start(0)
 
-reactor.run()
