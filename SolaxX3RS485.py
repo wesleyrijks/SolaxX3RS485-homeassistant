@@ -1,5 +1,6 @@
 from pymodbus.client.sync import ModbusSerialClient
 from pymodbus.constants import Defaults
+import json
 
 Defaults.UnitId = 1
 
@@ -19,7 +20,6 @@ class SolaxX3RS485(object):
         result = self.client.read_input_registers(0X400, 53)
         
         self.vals = {}
-        self.vals['name'] = self.port.replace("/dev/tty", "");
         self.vals['Pv1 input voltage'] = result.getRegister(0) / 10
         self.vals['Pv2 input voltage'] = result.getRegister(1) / 10
         self.vals['Pv1 input current'] = result.getRegister(2) / 10
@@ -58,4 +58,7 @@ class SolaxX3RS485(object):
         self.vals['Total Yield'] = join_msb_lsb(result.getRegister(36), result.getRegister(35)) / 1000
         self.vals['Yield Today'] = join_msb_lsb(result.getRegister(38), result.getRegister(37)) / 1000
         
-        print(self.vals)
+        print(json.dumps(self.vals))
+        
+        
+        
