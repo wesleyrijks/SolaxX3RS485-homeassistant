@@ -2,150 +2,196 @@
 # Sensors
 #######################################
   - platform: command_line
-    command: 'python3 ./SolaxX3RS485/__init__.py'
+    name: solax
+    command: "python3 ./SolaxX3RS485/__init__.py"
     scan_interval: 5
-
+    value_template: 'OK'
+    json_attributes:
+      - name
+      - Pv1 input voltage
+      - Pv2 input voltage
+      - Pv1 input current
+      - Pv2 input current
+      - Grid Voltage Phase 1
+      - Grid Voltage Phase 2
+      - Grid Voltage Phase 3
+      - Grid Frequency Phase 1
+      - Grid Frequency Phase 2
+      - Grid Frequency Phase 3
+      - Output Current Phase 1
+      - Output Current Phase 2
+      - Output Current Phase 3
+      - Temperature
+      - Inverter Power
+      - RunMode
+      - Output Power Phase 1
+      - Output Power Phase 2
+      - Output Power Phase 3
+      - Total DC Power
+      - PV1 DC Power
+      - PV2 DC Power
+      - Fault value of Phase 1 Voltage
+      - Fault value of Phase 2 Voltage
+      - Fault value of Phase 3 Voltage
+      - Fault value of Phase 1 Frequency
+      - Fault value of Phase 2 Frequency
+      - Fault value of Phase 3 Frequency
+      - Fault value of Phase 1 DCI
+      - Fault value of Phase 2 DCI
+      - Fault value of Phase 3 DCI
+      - Fault value of PV1 Voltage
+      - Fault value of PV2 Voltage
+      - Fault value of Temperature
+      - Fault value of GFCI
+      - Total Yield
+      - Yield Today
   - platform: template
     sensors:
       solax_v3_pro_pv1_input_voltage:
        friendly_name: Pv1 input voltage 
        device_class: 'power'
-       value_template: "{{ value_json['Pv1 input voltage'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Pv1 input voltage']}}"
       solax_v3_pro_pv2_input_voltage:
        friendly_name: Pv2 input voltage 
        device_class: 'power'
-       value_template: "{{ value_json['Pv2 input voltage'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Pv2 input voltage']}}"
       solax_v3_pro_pv1_input_current:
        friendly_name: Pv1 input current 
        device_class: 'power'
-       value_template: "{{ value_json['Pv1 input current'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Pv1 input current']}}"
       solax_v3_pro_pv2_input_current:
        friendly_name: Pv2 input current 
        device_class: 'power'
-       value_template: "{{ value_json['Pv2 input current'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Pv2 input current']}}"
       solax_v3_pro_grid_voltage_phase_1:
        friendly_name: Grid Voltage Phase 1 
        device_class: 'power'
-       value_template: "{{ value_json['Grid Voltage Phase 1'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Grid Voltage Phase 1']}}"
       solax_v3_pro_grid_voltage_phase_2:
        friendly_name: Grid Voltage Phase 2 
        device_class: 'power'
-       value_template: "{{ value_json['Grid Voltage Phase 2'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Grid Voltage Phase 2']}}"
       solax_v3_pro_grid_voltage_phase_3:
        friendly_name: Grid Voltage Phase 3 
        device_class: 'power'
-       value_template: "{{ value_json['Grid Voltage Phase 3'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Grid Voltage Phase 3']}}"
       solax_v3_pro_grid_frequency_phase_1:
        friendly_name: Grid Frequency Phase 1 
        device_class: 'power'
-       value_template: "{{ value_json['Grid Frequency Phase 1'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Grid Frequency Phase 1']}}"
       solax_v3_pro_grid_frequency_phase_2:
        friendly_name: Grid Frequency Phase 2 
-       value_template: "{{ value_json['Grid Frequency Phase 2'] }}" 
+       device_class: 'power'
+       value_template: "{{states.sensor.solax.attributes['Grid Frequency Phase 2']}}"
       solax_v3_pro_grid_frequency_phase_3:
        friendly_name: Grid Frequency Phase 3 
-       value_template: "{{ value_json['Grid Frequency Phase 3'] }}" 
+       device_class: 'power'
+       value_template: "{{states.sensor.solax.attributes['Grid Frequency Phase 3']}}"
       solax_v3_pro_output_current_phase_1:
        friendly_name: Output Current Phase 1 
        device_class: 'power'
-       value_template: "{{ value_json['Output Current Phase 1'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Output Current Phase 1']}}"
       solax_v3_pro_output_current_phase_2:
        friendly_name: Output Current Phase 2 
        device_class: 'power'
-       value_template: "{{ value_json['Output Current Phase 2'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Output Current Phase 2']}}"
       solax_v3_pro_output_current_phase_3:
        friendly_name: Output Current Phase 3 
        device_class: 'power'
-       value_template: "{{ value_json['Output Current Phase 3'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Output Current Phase 3']}}"
       solax_v3_pro_temperature:
        friendly_name: Temperature 
-       device_class: 'temperature'
-       unit_of_measurement: '°C'
-       value_template: "{{ value_json['Temperature'] }}" 
+       device_class: 'power'
+       value_template: "{{states.sensor.solax.attributes['Temperature']}}"
       solax_v3_pro_inverter_power:
        friendly_name: Inverter Power 
        device_class: 'power'
-       value_template: "{{ value_json['Inverter Power'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Inverter Power']}}"
       solax_v3_pro_runmode:
        friendly_name: RunMode 
-       value_template: "{{ value_json['RunMode'] }}" 
+       device_class: 'power'
+       value_template: "{{states.sensor.solax.attributes['RunMode']}}"
       solax_v3_pro_output_power_phase_1:
        friendly_name: Output Power Phase 1 
        device_class: 'power'
-       value_template: "{{ value_json['Output Power Phase 1'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Output Power Phase 1']}}"
       solax_v3_pro_output_power_phase_2:
        friendly_name: Output Power Phase 2 
        device_class: 'power'
-       value_template: "{{ value_json['Output Power Phase 2'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Output Power Phase 2']}}"
       solax_v3_pro_output_power_phase_3:
        friendly_name: Output Power Phase 3 
        device_class: 'power'
-       value_template: "{{ value_json['Output Power Phase 3'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Output Power Phase 3']}}"
       solax_v3_pro_total_dc_power:
        friendly_name: Total DC Power 
        device_class: 'power'
-       value_template: "{{ value_json['Total DC Power'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Total DC Power']}}"
       solax_v3_pro_pv1_dc_power:
        friendly_name: PV1 DC Power 
        device_class: 'power'
-       value_template: "{{ value_json['PV1 DC Power'] }}" 
+       value_template: "{{states.sensor.solax.attributes['PV1 DC Power']}}"
       solax_v3_pro_pv2_dc_power:
        friendly_name: PV2 DC Power 
        device_class: 'power'
-       value_template: "{{ value_json['PV2 DC Power'] }}" 
+       value_template: "{{states.sensor.solax.attributes['PV2 DC Power']}}"
       solax_v3_pro_fault_value_of_phase_1_voltage:
        friendly_name: Fault value of Phase 1 Voltage 
        device_class: 'power'
-       value_template: "{{ value_json['Fault value of Phase 1 Voltage'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Fault value of Phase 1 Voltage']}}"
       solax_v3_pro_fault_value_of_phase_2_voltage:
        friendly_name: Fault value of Phase 2 Voltage 
        device_class: 'power'
-       value_template: "{{ value_json['Fault value of Phase 2 Voltage'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Fault value of Phase 2 Voltage']}}"
       solax_v3_pro_fault_value_of_phase_3_voltage:
        friendly_name: Fault value of Phase 3 Voltage 
        device_class: 'power'
-       value_template: "{{ value_json['Fault value of Phase 3 Voltage'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Fault value of Phase 3 Voltage']}}"
       solax_v3_pro_fault_value_of_phase_1_frequency:
        friendly_name: Fault value of Phase 1 Frequency 
-       value_template: "{{ value_json['Fault value of Phase 1 Frequency'] }}" 
+       device_class: 'power'
+       value_template: "{{states.sensor.solax.attributes['Fault value of Phase 1 Frequency']}}"
       solax_v3_pro_fault_value_of_phase_2_frequency:
        friendly_name: Fault value of Phase 2 Frequency 
-       value_template: "{{ value_json['Fault value of Phase 2 Frequency'] }}" 
+       device_class: 'power'
+       value_template: "{{states.sensor.solax.attributes['Fault value of Phase 2 Frequency']}}"
       solax_v3_pro_fault_value_of_phase_3_frequency:
        friendly_name: Fault value of Phase 3 Frequency 
-       value_template: "{{ value_json['Fault value of Phase 3 Frequency'] }}" 
+       device_class: 'power'
+       value_template: "{{states.sensor.solax.attributes['Fault value of Phase 3 Frequency']}}"
       solax_v3_pro_fault_value_of_phase_1_dci:
        friendly_name: Fault value of Phase 1 DCI 
-       value_template: "{{ value_json['Fault value of Phase 1 DCI'] }}" 
+       device_class: 'power'
+       value_template: "{{states.sensor.solax.attributes['Fault value of Phase 1 DCI']}}"
       solax_v3_pro_fault_value_of_phase_2_dci:
        friendly_name: Fault value of Phase 2 DCI 
-       value_template: "{{ value_json['Fault value of Phase 2 DCI'] }}" 
+       device_class: 'power'
+       value_template: "{{states.sensor.solax.attributes['Fault value of Phase 2 DCI']}}"
       solax_v3_pro_fault_value_of_phase_3_dci:
        friendly_name: Fault value of Phase 3 DCI 
-       value_template: "{{ value_json['Fault value of Phase 3 DCI'] }}" 
+       device_class: 'power'
+       value_template: "{{states.sensor.solax.attributes['Fault value of Phase 3 DCI']}}"
       solax_v3_pro_fault_value_of_pv1_voltage:
        friendly_name: Fault value of PV1 Voltage 
        device_class: 'power'
-       value_template: "{{ value_json['Fault value of PV1 Voltage'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Fault value of PV1 Voltage']}}"
       solax_v3_pro_fault_value_of_pv2_voltage:
        friendly_name: Fault value of PV2 Voltage 
        device_class: 'power'
-       value_template: "{{ value_json['Fault value of PV2 Voltage'] }}" 
+       value_template: "{{states.sensor.solax.attributes['Fault value of PV2 Voltage']}}"
       solax_v3_pro_fault_value_of_temperature:
        friendly_name: Fault value of Temperature 
-       device_class: 'temperature'
-       unit_of_measurement: '°C'
-       value_template: "{{ value_json['Fault value of Temperature'] }}" 
+       device_class: 'power'
+       value_template: "{{states.sensor.solax.attributes['Fault value of Temperature']}}"
       solax_v3_pro_fault_value_of_gfci:
        friendly_name: Fault value of GFCI 
-       value_template: "{{ value_json['Fault value of GFCI'] }}" 
+       device_class: 'power'
+       value_template: "{{states.sensor.solax.attributes['Fault value of GFCI']}}"
       solax_v3_pro_total_yield:
        friendly_name: Total Yield 
-       device_class: 'energy'
-       unit_of_measurement: 'kWh'
-       value_template: "{{ value_json['Total Yield'] }}" 
+       device_class: 'power'
+       value_template: "{{states.sensor.solax.attributes['Total Yield']}}"
       solax_v3_pro_yield_today:
        friendly_name: Yield Today 
-       device_class: 'energy'
-       unit_of_measurement: 'kWh'
-       value_template: "{{ value_json['Yield Today'] }}"
+       device_class: 'power'
+       value_template: "{{states.sensor.solax.attributes['Yield Today']}}"
